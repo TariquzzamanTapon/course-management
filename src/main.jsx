@@ -13,8 +13,10 @@ const helmetContext = {};
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <HelmetProvider context={helmetContext}>
-      <RouterProvider router={router}></RouterProvider>
-    </HelmetProvider>
+    <div className="md:container mx-auto">
+      <HelmetProvider context={helmetContext}>
+        <RouterProvider router={router}></RouterProvider>
+      </HelmetProvider>
+    </div>
   </React.StrictMode>,
 )
