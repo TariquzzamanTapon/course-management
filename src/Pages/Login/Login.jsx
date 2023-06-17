@@ -1,47 +1,45 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from "react-hook-form";
 import { FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
+import { AuthContext } from '../../AuthProvider/AuthProver';
 
 const Login = () => {
+    const {logIn} = useContext(AuthContext)
     const [showPassword, setShowPassword] = useState(false);
     const { register, reset, handleSubmit, formState: { errors } } = useForm();
+    const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
 
     const onSubmit = data => {
-        // logIn(data.email, data.password)
-        //     .then(reslut => {
-        //         const loggeduser = reslut.user;
-        //         console.log(loggeduser)
-        //         Swal.fire({
-        //             title: 'Login Successfull',
-        //             showClass: {
-        //                 popup: 'animate__animated animate__fadeInDown'
-        //             },
-        //             hideClass: {
-        //                 popup: 'animate__animated animate__fadeOutUp'
-        //             }
-        //         })
-        //         Navigate(from, { replace: true })
-        //     })
-        //     .catch(error => {
-        //         Swal.fire({
-        //             title: `${error.message}`,
-        //             text: 'Do you want to continue',
-        //             icon: 'error',
-        //             confirmButtonText: 'Cool'
-        //         })
-        //     })
+        logIn(data.email, data.password)
+            .then(reslut => {
+                const loggeduser = reslut.user;
+                console.log(loggeduser)
+                Swal.fire({
+                    title: 'Login Successfull',
+                   
+                })
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: `${error.message}`,
+                    text: 'Do you want to continue',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
+            })
         console.log(data);
 
     }
 
 
-    const showHide = () => {
-        setShowPassword(!showPassword);
-    }
+    // const showHide = () => {
+    //     setShowPassword(!showPassword);
+    // }
     return (
         <div>
             <Helmet>

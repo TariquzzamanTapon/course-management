@@ -1,68 +1,62 @@
-import React from 'react';
+
 import { Helmet } from 'react-helmet-async';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 
+import { useContext } from 'react';
+import { AuthContext } from '../../AuthProvider/AuthProver';
+
+
 const Register = () => {
+    const {createUser, profileUpdate} = useContext(AuthContext);
+
     const { register, reset, handleSubmit, formState: { errors } } = useForm();
-    // const onSubmit = data => {
-    //     createUser(data.email, data.password)
-    //         .then(result => {
-    //             const loggedUser = result.user;
-    //             console.log(loggedUser);
-    //             profileUpdate(data.name, data.photoUrl)
-
-    //                 .then(() => {
-    //                     const savedUser = { name: data.name, email: data.email }
-    //                     fetch('https://islamic-school-server.vercel.app/users', {
-    //                         method: "POST",
-    //                         headers: {
-    //                             'content-type': 'application/json'
-    //                         },
-    //                         body: JSON.stringify(savedUser)
-    //                     })
-    //                         .then(res => res.json())
-    //                         .then(data => {
-    //                             if (data.insertedId) {
-    //                                 reset()
-    //                                 Swal.fire({
-    //                                     position: 'top-end',
-    //                                     icon: 'success',
-    //                                     title: 'User created successfully.',
-    //                                     showConfirmButton: false,
-    //                                     timer: 1500
-    //                                 });
-    //                                 navigate('/');
-    //                             }
-    //                         })
-    //                 })
-    //         })
-    //         .catch(error => {
-    //             console.log(error)
-    //             Swal.fire({
-    //                 title: `${error.message}`,
-    //                 text: 'Do you want to continue',
-    //                 icon: 'error',
-    //                 confirmButtonText: 'Cool'
-    //             })
-    //         })
-
-    //     if (data.password !== data.confirmPassword) {
-    //         Swal.fire({
-    //             title: "Password does not match",
-    //             text: "Please make sure the passwords match.",
-    //             icon: "error",
-    //             confirmButtonText: "OK"
-    //         });
-    //         return;
-    //     }
-    // }
-
-
     const onSubmit = data => {
-        console.log(data)
+        createUser(data.email, data.password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                profileUpdate(data.name, data.photo)
+                    .then(() => {
+                        const savedUser = { name: data.name, email: data.email }
+                        console.log(savedUser);
+                        // fetch('https://islamic-school-server.vercel.app/users', {
+                        //     method: "POST",
+                        //     headers: {
+                        //         'content-type': 'application/json'
+                        //     },
+                        //     body: JSON.stringify(savedUser)
+                        // })
+                        //     .then(res => res.json())
+                        //     .then(data => {
+                        //         if (data.insertedId) {
+                        //             reset()
+                        //             Swal.fire({
+                        //                 position: 'top-end',
+                        //                 icon: 'success',
+                        //                 title: 'User created successfully.',
+                        //                 showConfirmButton: false,
+                        //                 timer: 1500
+                        //             });
+                        //             navigate('/');
+                        //         }
+                        //     })
+                    })
+                    .catch(error =>{
+                        console.log(error.message)
+                    })
+            })
+            .catch(error => {
+                console.log(error)
+                Swal.fire({
+                    title: `${error.message}`,
+                    text: 'Do you want to continue',
+                    icon: 'error',
+                    confirmButtonText: 'Cool'
+                })
+            })
 
         if (data.password !== data.confirmPassword) {
             Swal.fire({
@@ -74,6 +68,21 @@ const Register = () => {
             return;
         }
     }
+
+
+    // const onSubmit = data => {
+    //     console.log(data)
+
+    //     if (data.password !== data.confirmPassword) {
+    //         Swal.fire({
+    //             title: "Password does not match",
+    //             text: "Please make sure the passwords match.",
+    //             icon: "error",
+    //             confirmButtonText: "OK"
+    //         });
+    //         return;
+    //     }
+    // }
     return (
         <div>
             <Helmet>

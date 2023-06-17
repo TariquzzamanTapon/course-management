@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import img from '../../../assets/logo.png'
+import { AuthContext } from '../../../AuthProvider/AuthProver';
 
 // Website logo or Website name, Home, Instructors, Classes, Dashboard and User profile picture
 const NavBar = () => {
-    const user = false;
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logOut();
+    }
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -17,8 +22,9 @@ const NavBar = () => {
                             <li><Link to='/'>Home</Link></li>
                             <li><Link to='/'>Instructors</Link></li>
                             <li><Link to='/'>Classes</Link></li>
-                            <li><Link to='/'>Dashboard</Link></li>
-
+                            {
+                                user ? <><li><Link to='/'>Dashboard</Link></li></> : ""
+                            }
                         </ul>
                     </div>
                     <Link className=" font-bold normal-case text-xl">Sports Academy</Link>
@@ -35,9 +41,15 @@ const NavBar = () => {
                 </div>
                 <div className="navbar-end">
                     {
-                        user ? <img src="" alt="" /> : ""
+                        user ?
+                            <div className='flex'>
+                                <img className='w-10 rounded-full mx-2' src={user?.photoURL} alt="" />
+                                <Link onClick={handleLogout} className='btn btn-success'>Logout</Link>
+                            </div>
+                            : <Link to="/login" className='btn btn-primary'>Login</Link>
+
                     }
-                    <a className="btn"> Login</a>
+
                 </div>
             </div>
             <hr />
