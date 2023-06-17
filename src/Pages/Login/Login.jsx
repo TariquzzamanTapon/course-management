@@ -37,9 +37,9 @@ const Login = () => {
     }
 
 
-    // const showHide = () => {
-    //     setShowPassword(!showPassword);
-    // }
+    const showHide = () => {
+        setShowPassword(!showPassword);
+    }
     return (
         <div>
             <Helmet>
