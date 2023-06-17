@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const PopularInstructor = () => {
     const [instructors, setInstructors] = useState([]);
 
-    fetch('http://localhost:5000/instructors')
-        .then(res => res.json())
-        .then(data => setInstructors(data))
+    useEffect(() => {
+        fetch('https://school-hunt-tariquzzamantapon.vercel.app/instructors')
+            .then(res => res.json())
+            .then(data => setInstructors(data))
+    }, [])
 
     return (
         <div className='my-10'>
@@ -18,16 +20,8 @@ const PopularInstructor = () => {
                         <div className="card-body">
                             <h2 className="card-title">{instructor?.name}</h2>
                             <p>{instructor?.email}</p>
-                            <p><span className='font-bold'>Class Taken :</span> {instructor?.numberOfClassTakenByInstructor}</p>
-                            <div>
-                                <p className='font-bold'>Class Taken Name -</p>
-                                {
-                                    instructor?.nameOfTheClassesTakenByTheInstructor.map(p=> <li className='mx-4'>{p}</li> )
-                                }
-                            </div>
-                            <div className="card-actions justify-end">
-                                <button className="btn btn-primary">Watch</button>
-                            </div>
+                            <p><span className='font-semiBold'>Enrolled Student :</span> {instructor?.enrolledStudent}</p>
+
                         </div>
                     </div>)
                 }

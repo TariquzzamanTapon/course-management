@@ -10,8 +10,24 @@ import { AuthContext } from '../../AuthProvider/AuthProver';
 
 
 const Register = () => {
-    const {createUser, profileUpdate} = useContext(AuthContext);
+    const { createUser, profileUpdate, googleSignIn } = useContext(AuthContext);
 
+    const handleGoogle = () => {
+        googleSignIn()
+            .then(() => {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'User created successfully.',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate('/');
+            })
+            .catch(error =>{
+                console.log(error);
+            })
+    }
     const { register, reset, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         createUser(data.email, data.password)
@@ -22,29 +38,29 @@ const Register = () => {
                     .then(() => {
                         const savedUser = { name: data.name, email: data.email }
                         console.log(savedUser);
-                        // fetch('https://islamic-school-server.vercel.app/users', {
-                        //     method: "POST",
-                        //     headers: {
-                        //         'content-type': 'application/json'
-                        //     },
-                        //     body: JSON.stringify(savedUser)
-                        // })
-                        //     .then(res => res.json())
-                        //     .then(data => {
-                        //         if (data.insertedId) {
-                        //             reset()
-                        //             Swal.fire({
-                        //                 position: 'top-end',
-                        //                 icon: 'success',
-                        //                 title: 'User created successfully.',
-                        //                 showConfirmButton: false,
-                        //                 timer: 1500
-                        //             });
-                        //             navigate('/');
-                        //         }
-                        //     })
+                        fetch('https://school-hunt-tariquzzamantapon.vercel.app/users', {
+                            method: "POST",
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(savedUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    reset()
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'User created successfully.',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    navigate('/');
+                                }
+                            })
                     })
-                    .catch(error =>{
+                    .catch(error => {
                         console.log(error.message)
                     })
             })
@@ -97,7 +113,7 @@ const Register = () => {
                         <h1 className="text-3xl text-center mt-2 font-bold">Register Now!</h1>
                         <div className="card-body">
                             <div>
-                                <button className='w-full btn btn-accent text-white'>Connect With Google <FaGoogle></FaGoogle></button>
+                                <button onClick={handleGoogle} className='w-full btn btn-accent text-white'>Connect With Google <FaGoogle></FaGoogle></button>
                                 <div className='divider'></div>
                                 <label className="label">
                                     <p className='text-right'>Already Have Account ? <Link className='underline text-success font-bold' to='/login'>Login</Link></p>

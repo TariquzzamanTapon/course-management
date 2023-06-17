@@ -7,11 +7,32 @@ import Swal from 'sweetalert2'
 import { AuthContext } from '../../AuthProvider/AuthProver';
 
 const Login = () => {
-    const {logIn} = useContext(AuthContext)
+    const { logIn, googleSignIn } = useContext(AuthContext)
     const [showPassword, setShowPassword] = useState(false);
     const { register, reset, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
+
+
+    const handleGoogle = () => {
+        googleSignIn()
+            .then(() => {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'User created successfully.',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate('/');
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
+
+
 
     const onSubmit = data => {
         logIn(data.email, data.password)
@@ -20,7 +41,7 @@ const Login = () => {
                 console.log(loggeduser)
                 Swal.fire({
                     title: 'Login Successfull',
-                   
+
                 })
                 navigate(from, { replace: true })
             })
@@ -52,7 +73,7 @@ const Login = () => {
 
                         <h1 className="text-3xl text-center mb-4 font-bold my-3">Login  now!</h1>
                         <div>
-                            <button className='w-full btn btn-accent text-white'>Connect With Google <FaGoogle></FaGoogle></button>
+                            <button onClick={handleGoogle} className='w-full btn btn-accent text-white'>Connect With Google <FaGoogle></FaGoogle></button>
                             <div className='divider'></div>
 
                             <label className="label text-right">
@@ -85,7 +106,7 @@ const Login = () => {
                             <div className="form-control mt-6">
                                 <input className="btn btn-primary" type="submit" value="Login" />
                             </div>
-                            
+
                         </div>
 
 
