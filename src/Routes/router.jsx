@@ -6,35 +6,47 @@ import Register from "../Pages/Register/Register";
 import Login from "../Pages/Login/Login";
 import Instructor from "../Pages/Instructor/Instructor";
 import Classes from "../Pages/Home/Classes/Classes";
+import Dashboard from "../Layout/Dashboard";
+import MySelectClass from "../Pages/Dashboard/MySelectClass/MySelectClass";
 
 
 const router = createBrowserRouter([
   {
-    path : '/',
-    element : <Main></Main>,
-    errorElement : <Error></Error>,
-    children : [
+    path: '/',
+    element: <Main></Main>,
+    errorElement: <Error></Error>,
+    children: [
       {
-        path : '/',
-        element : <Home></Home>
+        path: '/',
+        element: <Home></Home>
       },
       {
-        path : '/instructor',
-        element : <Instructor></Instructor>
+        path: '/instructor',
+        element: <Instructor></Instructor>
       },
       {
-        path : "class",
-        element : <Classes></Classes>
+        path: "class",
+        element: <Classes></Classes>
       },
       {
-        path : '/login',
-        element : <Login></Login>
+        path: '/login',
+        element: <Login></Login>
       },
       {
-        path : "/register",
-        element : <Register></Register>
+        path: "/register",
+        element: <Register></Register>
       }
 
+    ]
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children : [
+      {
+        path :"/dashboard/myclass",
+        element : <MySelectClass></MySelectClass>
+      }
     ]
   }
 ])

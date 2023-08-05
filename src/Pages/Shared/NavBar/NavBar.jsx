@@ -23,7 +23,7 @@ const NavBar = () => {
                             <li><Link to='/instructor'>Instructors</Link></li>
                             <li><Link to='/class'>Classes</Link></li>
                             {
-                                user ? <><li><Link to='/'>Dashboard</Link></li></> : ""
+                                user ? <><li><Link to='/dashboard'>Dashboard</Link></li></> : ""
                             }
                         </ul>
                     </div>
@@ -35,7 +35,7 @@ const NavBar = () => {
                         <li><Link to='/instructor'>Instructors</Link></li>
                         <li><Link to='/class'>Classes</Link></li>
                         {
-                            user ? <><li><Link to='/'>Dashboard</Link></li></> : ""
+                            user ? <><li><Link to='/dashboard'>Dashboard</Link></li></> : ""
                         }
                     </ul>
                 </div>
@@ -43,7 +43,7 @@ const NavBar = () => {
                     {
                         user ?
                             <div className='flex'>
-                                <img className='w-10 rounded-full mx-2' src={user?.photoURL} alt="" />
+                                <img className='w-10 mx-2' src={user?.photoURL} alt="" />
                                 <Link onClick={handleLogout} className='btn btn-success'>Logout</Link>
                             </div>
                             : <Link to="/login" className='btn btn-primary'>Login</Link>
