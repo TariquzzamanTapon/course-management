@@ -10,20 +10,20 @@ const ClassesBox = ({ info }) => {
     const { _id, image, name, instructorName, availableSeats, price } = info;
 
     const handleBooking = (id) => {
-        console.log('you just hit me', id);
-        const cartItem = {
-            cartId : _id,
-            image,name, instructorName, availableSeats,price
-        }
-        console.log(cartItem);
-        if(user && user?.email){
-            axios.post('http://localhost:5000/carts',cartItem)
-            .then(data=> {
-                if(data.data.insertedId){
-                    toast.success("Successfully data added")
-                }
-            })
-            .catch(error=> toast.error(error.message))
+
+        if (user && user?.email) {
+            const cartItem = {
+                cartId: _id,
+                email: user.email,
+                image, name, instructorName, availableSeats, price
+            }
+            axios.post('http://localhost:5000/carts', cartItem)
+                .then(data => {
+                    if (data.data.insertedId) {
+                        toast.success("Successfully data added")
+                    }
+                })
+                .catch(error => toast.error(error.message))
         }
     }
     return (

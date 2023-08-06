@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProver';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { BiSelectMultiple } from 'react-icons/bi';
 import { TbBrandBooking } from 'react-icons/tb';
+import { RiArrowGoBackFill } from 'react-icons/ri';
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
@@ -10,7 +11,7 @@ const Dashboard = () => {
         <div className='flex my-1 h-screen'>
 
             <div className='w-2/6 bg-purple-400 p-5 rounded-md shadow'>
-
+                <Link to='/'><RiArrowGoBackFill className='w-6 h-6'></RiArrowGoBackFill></Link>
                 <div className="avatar online">
                     <div className="w-24 rounded-full">
                         <img src={user?.photoURL} />
@@ -30,7 +31,7 @@ const Dashboard = () => {
             </div>
 
 
-            <div className='w-4/6 flex justify-center items-center'>
+            <div className='w-4/6 my-20'>
                 <Outlet></Outlet>
             </div>
         </div>
