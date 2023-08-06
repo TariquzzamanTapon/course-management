@@ -27,20 +27,20 @@ const MangeUsers = () => {
                 console.log(error.message)
             })
     }
-    // const handleInstructor = (user) => {
-    //     console.log( 'instructor')
-    //     fetch(`http://localhost:5000/users/instructor/${user?._id}`, {
-    //         method: "PATCH"
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             toast.success(`${user?.name} is instructor now`)
-    //             refetch();
-    //         })
-    //         .catch(error => {
-    //             console.log(error.message)
-    //         })
-    // }
+    const handleInstructor = (user) => {
+        console.log( 'instructor')
+        fetch(`http://localhost:5000/users/instructor/${user?._id}`, {
+            method: "PATCH"
+        })
+            .then(res => res.json())
+            .then(data => {
+                toast.success(`${user?.name} is instructor now`)
+                refetch();
+            })
+            .catch(error => {
+                console.log(error.message)
+            })
+    }
 
 
 
