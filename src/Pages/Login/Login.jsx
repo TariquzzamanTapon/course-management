@@ -5,6 +5,7 @@ import { FaGoogle } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import { AuthContext } from '../../AuthProvider/AuthProver';
+import { saveUser } from '../../componets/Firebase/Hooks/auth';
 
 const Login = () => {
     const { logIn, googleSignIn } = useContext(AuthContext)
@@ -16,7 +17,8 @@ const Login = () => {
 
     const handleGoogle = () => {
         googleSignIn()
-            .then(() => {
+            .then((result) => {
+                saveUser(result.user)
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',

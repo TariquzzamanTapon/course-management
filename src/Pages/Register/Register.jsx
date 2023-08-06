@@ -7,6 +7,8 @@ import Swal from 'sweetalert2';
 
 import { useContext } from 'react';
 import { AuthContext } from '../../AuthProvider/AuthProver';
+import { saveUser } from '../../componets/Firebase/Hooks/auth';
+import { toast } from 'react-hot-toast';
 
 
 const Register = () => {
@@ -14,7 +16,7 @@ const Register = () => {
 
     const handleGoogle = () => {
         googleSignIn()
-            .then(() => {
+            .then((result) => {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -22,50 +24,29 @@ const Register = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                navigate('/');
+                saveUser(result.user)
+                navigate(from, { replace: true })
             })
-            .catch(error =>{
-                console.log(error);
+            .catch(error => {
+                toast.error(error.message);
             })
     }
     const { register, reset, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         createUser(data.email, data.password)
             .then(result => {
-                const loggedUser = result.user;
-                console.log(loggedUser);
                 profileUpdate(data.name, data.photo)
                     .then(() => {
-                        const savedUser = { name: data.name, email: data.email }
-                        console.log(savedUser);
-                        fetch('https://school-hunt-tariquzzamantapon.vercel.app/users', {
-                            method: "POST",
-                            headers: {
-                                'content-type': 'application/json'
-                            },
-                            body: JSON.stringify(savedUser)
-                        })
-                            .then(res => res.json())
-                            .then(data => {
-                                if (data.insertedId) {
-                                    reset()
-                                    Swal.fire({
-                                        position: 'top-end',
-                                        icon: 'success',
-                                        title: 'User created successfully.',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    });
-                                    navigate('/');
-                                }
-                            })
+                        toast.success('Signup successful')
+                        saveUser(result.user)
+                        navigate(from, { replace: true })
+                        reset();
                     })
                     .catch(error => {
-                        console.log(error.message)
+                        toast.success(error.message)
                     })
             })
             .catch(error => {
-                console.log(error)
                 Swal.fire({
                     title: `${error.message}`,
                     text: 'Do you want to continue',
