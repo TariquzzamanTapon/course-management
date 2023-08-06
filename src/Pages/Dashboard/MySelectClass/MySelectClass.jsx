@@ -45,7 +45,7 @@ const MySelectClass = () => {
 
 
     return (
-        <div className='p-4'>
+        <div >
             <div className='text-2xl font-bold text-right mb-3'>
                 Your Selected Class: {carts?.length}
             </div>
