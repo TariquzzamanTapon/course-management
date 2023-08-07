@@ -20,7 +20,7 @@ const ClassesBox = ({ info }) => {
                 email: user.email,
                 image, name, instructorName, availableSeats, price
             }
-            axios.post('http://localhost:5000/carts', cartItem)
+            axios.post('https://school-hunt.vercel.app/carts', cartItem)
                 .then(data => {
                     if (data.data.insertedId) {
                         toast.success("Successfully data added")

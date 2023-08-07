@@ -23,7 +23,7 @@ const AddClass = () => {
         const myClass = {
             image, name, instructorName, email, price, availableSeats, status, totalEnrolledStudent
         }
-        axios.post('http://localhost:5000/class/instructor', myClass,{
+        axios.post('https://school-hunt.vercel.app/class/instructor', myClass,{
             headers : {
                 authorization : `Bearer ${localStorage.getItem('access-token')}`
             }

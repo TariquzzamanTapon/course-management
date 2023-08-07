@@ -8,7 +8,7 @@ const useClass = () => {
     const { refetch, data: course = [], } = useQuery({
         queryKey: ['class', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/class`, {
+            const res = await fetch(`https://school-hunt.vercel.app/class`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('access-token')}`
                 }

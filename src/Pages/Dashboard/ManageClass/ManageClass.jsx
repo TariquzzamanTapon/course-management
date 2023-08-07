@@ -7,7 +7,7 @@ const ManageClass = () => {
 
     const handleApproved = (item) => {
         console.log(item._id, 'approved')
-        fetch(`http://localhost:5000/class/instructor/approved/${item?._id}`, {
+        fetch(`https://school-hunt.vercel.app/class/instructor/approved/${item?._id}`, {
             method: "PATCH"
         })
             .then(res => res.json())
@@ -22,7 +22,7 @@ const ManageClass = () => {
 
     const handleDenied = (item) => {
         console.log(item._id, 'deneid')
-        fetch(`http://localhost:5000/class/instructor/denied/${item?._id}`, {
+        fetch(`https://school-hunt.vercel.app/class/instructor/denied/${item?._id}`, {
             method: "PATCH"
         })
             .then(res => res.json())

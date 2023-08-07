@@ -6,7 +6,7 @@ const MangeUsers = () => {
     const { data: users = [], refetch } = useQuery({
         queryKey: ['user'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users',{
+            const res = await fetch('https://school-hunt.vercel.app/users',{
                 headers : {
                     authorization : `Bearer ${localStorage.getItem('access-token')}`
                 }
@@ -19,7 +19,7 @@ const MangeUsers = () => {
 
     const handleAdmin = (user) => {
         console.log(user._id, 'admin');
-        fetch(`http://localhost:5000/users/admin/${user?._id}`, {
+        fetch(`https://school-hunt.vercel.app/users/admin/${user?._id}`, {
             method: "PATCH"
         })
             .then(res => res.json())
@@ -33,7 +33,7 @@ const MangeUsers = () => {
     }
     const handleInstructor = (user) => {
         console.log( 'instructor')
-        fetch(`http://localhost:5000/users/instructor/${user?._id}`, {
+        fetch(`https://school-hunt.vercel.app/users/instructor/${user?._id}`, {
             method: "PATCH"
         })
             .then(res => res.json())

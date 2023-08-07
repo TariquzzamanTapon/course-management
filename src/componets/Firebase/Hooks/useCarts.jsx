@@ -9,7 +9,7 @@ const useCarts = () => {
     const { refetch, data : carts = [],} = useQuery({
         queryKey: ['carts', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/carts?email=${user?.email}`,{
+            const res = await fetch(`https://school-hunt.vercel.app/carts?email=${user?.email}`,{
                 headers: {
                     authorization : `Bearer ${localStorage.getItem('access-token')}`
                 }

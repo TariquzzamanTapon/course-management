@@ -9,7 +9,7 @@ const useAdmin = () => {
     const { data: isAdmin, isLoading, refetch } = useQuery({
         queryKey: ['admin', user?.email],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/users/admin/${user?.email}`, {
+            const res = await axios.get(`https://school-hunt.vercel.app/users/admin/${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('access-token')}`
                 }

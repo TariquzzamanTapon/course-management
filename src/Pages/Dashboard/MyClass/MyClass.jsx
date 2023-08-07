@@ -10,7 +10,7 @@ const MyClass = () => {
     const [iclass, setIclass] = useState([]);
     const { user } = useContext(AuthContext);
     useEffect(() => {
-        fetch(`http://localhost:5000/class/instructor?email=${user?.email}`, {
+        fetch(`https://school-hunt.vercel.app/class/instructor?email=${user?.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('access-token')}`
             }

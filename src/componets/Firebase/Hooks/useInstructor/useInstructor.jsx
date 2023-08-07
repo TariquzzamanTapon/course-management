@@ -10,7 +10,7 @@ const useInstructor = () => {
     const { data: isInstructor, refetch, isLoading: isInstructorLoading } = useQuery({
         queryKey: ['isInstructor'],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/users/instructor/${user?.email}`, {
+            const res = await axios.get(`https://school-hunt.vercel.app/users/instructor/${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('access-token')}`
                 }
