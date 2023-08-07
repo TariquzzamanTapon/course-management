@@ -1,22 +1,38 @@
 import React from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../../../AuthProvider/AuthProver';
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 const AddClass = () => {
     const { user } = useContext(AuthContext);
 
-    const handleAddToy = (e) => {
+    const handleClass = (e) => {
+        // _id, image, name, instructorName, availableSeats, price
         e.preventDefault();
-        const classPicture = e.target.picture.value;
-        const className = e.target.className.value;
+        const image = e.target.picture.value;
+        const name = e.target.className.value;
         const instructorName = user?.displayName;
         const email = user?.email;
         const price = e.target.price.value;
-        const seats = e.target.seats.value;
+        const availableSeats = e.target.seats.value;
+        let status = 'pending'
+        let totalEnrolledStudent = 0;
+        let numberOfStudent  = 0;
         
         const myClass = {
-            classPicture, className, instructorName, email, price, seats
+            image, name, instructorName, email, price, availableSeats, status, totalEnrolledStudent
         }
+        axios.post('http://localhost:5000/class/instructor', myClass,{
+            headers : {
+                authorization : `Bearer ${localStorage.getItem('access-token')}`
+            }
+        })
+        .then(res=>{
+            console.log(res.data)
+            toast.success('Class add successfully');
+        })
+
 
         console.log(myClass);
 
@@ -24,7 +40,7 @@ const AddClass = () => {
     return (
         <div className='my-4 md:my-10'>
 
-            <form onSubmit={handleAddToy}>
+            <form onSubmit={handleClass}>
                 <div className="flex py-2">
                     <div className="form-control w-full mx-2 ">
                         <label className="label">

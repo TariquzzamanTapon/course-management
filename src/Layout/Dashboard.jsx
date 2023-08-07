@@ -19,20 +19,20 @@ const Dashboard = () => {
     return (
         <div className='flex my-1 h-screen'>
 
-            <div className='w-2/6 bg-purple-400 p-5 rounded-md shadow'>
+            <div className='w-2/6 bg-purple-400 p-5 rounded-md shadow mb-4'>
                 <Link to='/'><RiArrowGoBackFill className='w-6 h-6'></RiArrowGoBackFill></Link>
                 <div className="avatar online">
                     <div className="w-24 rounded-full">
                         <img src={user?.photoURL} />
                     </div>
                 </div>
-
+                <div className="divider h-4"></div>
 
                 {/* they are condition rendering here */}
                 {
                     isAdmin == true ? <>
                         <div className='my-3 font-semibold'>
-                            <NavLink to='/dashboard/' className='flex items-center hover:font-bold transition mb-1'>
+                            <NavLink to='/dashboard/manage-class' className='flex items-center hover:font-bold transition mb-1'>
                                 <BiSelectMultiple className='w-6 h-6 mx-1'></BiSelectMultiple> Manage Classes
                             </NavLink>
                             <NavLink to='/dashboard/manage-users' className='flex items-center hover:font-bold transition mb-1'>
@@ -46,7 +46,7 @@ const Dashboard = () => {
                                 <NavLink to='/dashboard/add-class' className='flex items-center hover:font-bold transition mb-1'>
                                     <BiSelectMultiple className='w-6 h-6 mx-1'></BiSelectMultiple> Add Class
                                 </NavLink>
-                                <NavLink className='flex items-center hover:font-bold transition mb-1'>
+                                <NavLink to='/dashboard/my-class' className='flex items-center hover:font-bold transition mb-1'>
                                     <TbBrandBooking className='w-6 h-6 mx-1'></TbBrandBooking> My Classes
                                 </NavLink>
                             </div>
@@ -59,6 +59,9 @@ const Dashboard = () => {
                                     </NavLink>
                                     <NavLink className='flex items-center hover:font-bold transition mb-1'>
                                         <TbBrandBooking className='w-6 h-6 mx-1'></TbBrandBooking> My Enrolled Classes
+                                    </NavLink>
+                                    <NavLink className='flex items-center hover:font-bold transition mb-1'>
+                                        <TbBrandBooking className='w-6 h-6 mx-1'></TbBrandBooking>Payment History
                                     </NavLink>
                                 </div>
                             </>

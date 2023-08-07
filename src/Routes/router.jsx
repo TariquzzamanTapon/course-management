@@ -10,6 +10,10 @@ import Dashboard from "../Layout/Dashboard";
 import MySelectClass from "../Pages/Dashboard/MySelectClass/MySelectClass";
 import MangeUsers from "../Pages/Dashboard/MangeUsers/MangeUsers";
 import AddClass from "../Pages/Dashboard/AddClass/AddClass";
+import AdminRoute from "./adminRoute";
+import Payment from "../Pages/Dashboard/Payment/Payment";
+import MyClass from "../Pages/Dashboard/MyClass/MyClass";
+import ManageClass from "../Pages/Dashboard/ManageClass/ManageClass";
 
 
 const router = createBrowserRouter([
@@ -51,10 +55,26 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/manage-users',
-        element: <MangeUsers></MangeUsers>
-      }, {
+        element: <AdminRoute><MangeUsers></MangeUsers></AdminRoute>
+      }, 
+
+      {
+        path: '/dashboard/manage-class',
+        element: <AdminRoute><ManageClass></ManageClass></AdminRoute>
+      }, 
+
+      {
         path: '/dashboard/add-class',
         element: <AddClass></AddClass>
+      },
+      {
+        path : '/dashboard/my-class',
+        element : <MyClass></MyClass>
+      },
+      {
+        path : '/dashboard/payment/:id',
+        element : <Payment></Payment>,
+        loader : ({params})=> fetch(`https://toys-hunter.vercel.app/toys/${params.id}`)
       }
     ]
   }
