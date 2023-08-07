@@ -8,7 +8,7 @@ import { useLoaderData, useLocation } from "react-router-dom";
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 const Payment = () => {
     const {cart} = useLoaderData();
-    console.log(cart);
+    // console.log(cart);
     return (
         <div>
             your price {}

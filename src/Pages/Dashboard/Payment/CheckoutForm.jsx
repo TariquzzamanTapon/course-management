@@ -26,7 +26,7 @@ const CheckoutForm = ({ item }) => {
             }
         })
             .then(res => {
-                console.log(res.data.clientSecret)
+                // console.log(res.data.clientSecret)
                 setClientSecret(res.data.clientSecret);
             })
 

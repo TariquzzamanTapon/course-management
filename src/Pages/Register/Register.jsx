@@ -67,19 +67,6 @@ const Register = () => {
     }
 
 
-    // const onSubmit = data => {
-    //     console.log(data)
-
-    //     if (data.password !== data.confirmPassword) {
-    //         Swal.fire({
-    //             title: "Password does not match",
-    //             text: "Please make sure the passwords match.",
-    //             icon: "error",
-    //             confirmButtonText: "OK"
-    //         });
-    //         return;
-    //     }
-    // }
     return (
         <div>
             <Helmet>

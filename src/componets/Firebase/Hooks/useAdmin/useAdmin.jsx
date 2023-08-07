@@ -14,7 +14,7 @@ const useAdmin = () => {
                     authorization: `Bearer ${localStorage.getItem('access-token')}`
                 }
             });
-            console.log('use admin', res)
+            // console.log('use admin', res)
             return res.data.admin
         }
     })

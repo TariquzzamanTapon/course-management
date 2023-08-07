@@ -18,7 +18,7 @@ const MangeUsers = () => {
 
 
     const handleAdmin = (user) => {
-        console.log(user._id, 'admin');
+        // console.log(user._id, 'admin');
         fetch(`https://school-hunt.vercel.app/users/admin/${user?._id}`, {
             method: "PATCH"
         })
@@ -28,11 +28,11 @@ const MangeUsers = () => {
                 refetch();
             })
             .catch(error => {
-                console.log(error.message)
+                // console.log(error.message)
             })
     }
     const handleInstructor = (user) => {
-        console.log( 'instructor')
+        // console.log( 'instructor')
         fetch(`https://school-hunt.vercel.app/users/instructor/${user?._id}`, {
             method: "PATCH"
         })

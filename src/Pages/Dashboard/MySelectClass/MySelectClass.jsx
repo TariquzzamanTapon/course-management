@@ -12,7 +12,7 @@ const MySelectClass = () => {
 
     const { user } = useContext(AuthContext)
     const [carts, refetch] = useCarts();
-    console.log(carts);
+    // console.log(carts);
 
 
     const handleDelete = id => {

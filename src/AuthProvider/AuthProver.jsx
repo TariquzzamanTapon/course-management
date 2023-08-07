@@ -42,7 +42,7 @@ const AuthProvider = ({children}) => {
             if(currentUser){
                 axios.post(`https://school-hunt.vercel.app/jwt`, {email : currentUser.email})
                 .then(res=>{
-                    console.log(res.data.token)
+                    // console.log(res.data.token)
                     localStorage.setItem('access-token', res.data.token)
                 })
             }

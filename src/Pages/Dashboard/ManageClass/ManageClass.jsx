@@ -6,7 +6,7 @@ const ManageClass = () => {
     const [course, refetch] = useClass();
 
     const handleApproved = (item) => {
-        console.log(item._id, 'approved')
+        // console.log(item._id, 'approved')
         fetch(`https://school-hunt.vercel.app/class/instructor/approved/${item?._id}`, {
             method: "PATCH"
         })
@@ -16,12 +16,12 @@ const ManageClass = () => {
                 refetch();
             })
             .catch(error => {
-                console.log(error.message)
+                // console.log(error.message)
             })
     }
 
     const handleDenied = (item) => {
-        console.log(item._id, 'deneid')
+        // console.log(item._id, 'deneid')
         fetch(`https://school-hunt.vercel.app/class/instructor/denied/${item?._id}`, {
             method: "PATCH"
         })
@@ -31,7 +31,7 @@ const ManageClass = () => {
                 refetch();
             })
             .catch(error => {
-                console.log(error.message)
+                // console.log(error.message)
             })
     }
     return (

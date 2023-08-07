@@ -29,7 +29,7 @@ const Login = () => {
                 navigate('/');
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             })
     }
 
@@ -40,7 +40,7 @@ const Login = () => {
         logIn(data.email, data.password)
             .then(reslut => {
                 const loggeduser = reslut.user;
-                console.log(loggeduser)
+                // console.log(loggeduser)
                 Swal.fire({
                     title: 'Login Successfull',
 
@@ -55,7 +55,7 @@ const Login = () => {
                     confirmButtonText: 'Ok'
                 })
             })
-        console.log(data);
+        // console.log(data);
 
     }
 

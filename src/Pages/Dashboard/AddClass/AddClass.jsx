@@ -29,12 +29,12 @@ const AddClass = () => {
             }
         })
         .then(res=>{
-            console.log(res.data)
+            // console.log(res.data)
             toast.success('Class add successfully');
         })
 
 
-        console.log(myClass);
+        // console.log(myClass);
 
     }
     return (

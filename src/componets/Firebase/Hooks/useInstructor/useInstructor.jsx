@@ -15,7 +15,7 @@ const useInstructor = () => {
                     authorization: `Bearer ${localStorage.getItem('access-token')}`
                 }
             });
-            console.log('from instructor', res.data.instructor)
+            // console.log('from instructor', res.data.instructor)
             return res.data.instructor;
         }
     })
