@@ -4,13 +4,16 @@ import { AuthContext } from '../../../AuthProvider/AuthProver';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import useAdmin from '../../../componets/Firebase/Hooks/useAdmin/useAdmin';
+import useInstructor from '../../../componets/Firebase/Hooks/useInstructor/useInstructor';
 
 const ClassesBox = ({ info }) => {
     const { user } = useContext(AuthContext);
     const { _id, image, name, instructorName, availableSeats, price } = info;
+    const [isAdmin] = useAdmin();
+    const [isInstructor] =  useInstructor();
 
     const handleBooking = (id) => {
-
         if (user && user?.email) {
             const cartItem = {
                 cartId: _id,
@@ -54,7 +57,7 @@ const ClassesBox = ({ info }) => {
                             <p> <span className='font-semibold'> Price : </span> {price}</p>
                             <div className="card-actions justify-end">
                                 {
-                                    user ? <button onClick={() => handleBooking(_id)} disabled={availableSeats == 0} className=' btn w-full bg-red-200 hover:bg-red-300'>Select Class</button> :
+                                    user ? <button onClick={() => handleBooking(_id)} disabled={availableSeats == 0 || isAdmin || isInstructor } className=' btn w-full bg-red-200 hover:bg-red-300'>Select Class</button> :
                                         <Link to='/login' className='btn w-full bg-red-200 hover:bg-red-300'>login to access class</Link>
                                 }
                             </div>

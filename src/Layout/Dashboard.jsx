@@ -5,11 +5,17 @@ import { BiSelectMultiple } from 'react-icons/bi';
 import { TbBrandBooking } from 'react-icons/tb';
 import { RiArrowGoBackFill } from 'react-icons/ri';
 import { useState } from 'react';
+import useAdmin from '../componets/Firebase/Hooks/useAdmin/useAdmin';
+import useInstructor from '../componets/Firebase/Hooks/useInstructor/useInstructor';
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
-    const [isAdmin, setIsAdmin] = useState(true);
-    const [isInstructor, setIsInstructor]= useState(false);
+    // const [isAdmin, setIsAdmin] = useState(true);
+    // const [isInstructor, setIsInstructor] = useState(false);
+
+    const [isAdmin] = useAdmin();
+    const [isInstructor] = useInstructor();
+
     return (
         <div className='flex my-1 h-screen'>
 
@@ -24,7 +30,7 @@ const Dashboard = () => {
 
                 {/* they are condition rendering here */}
                 {
-                    isAdmin ? <>
+                    isAdmin == true ? <>
                         <div className='my-3 font-semibold'>
                             <NavLink to='/dashboard/' className='flex items-center hover:font-bold transition mb-1'>
                                 <BiSelectMultiple className='w-6 h-6 mx-1'></BiSelectMultiple> Manage Classes
@@ -35,16 +41,27 @@ const Dashboard = () => {
                         </div>
                     </>
                         :
-                        <>
+                        isInstructor ? <>
                             <div className='my-3 font-semibold'>
-                                <NavLink to='/dashboard/myclass' className='flex items-center hover:font-bold transition mb-1'>
-                                    <BiSelectMultiple className='w-6 h-6 mx-1'></BiSelectMultiple> My Selected Class
+                                <NavLink to='/dashboard/add-class' className='flex items-center hover:font-bold transition mb-1'>
+                                    <BiSelectMultiple className='w-6 h-6 mx-1'></BiSelectMultiple> Add Class
                                 </NavLink>
                                 <NavLink className='flex items-center hover:font-bold transition mb-1'>
-                                    <TbBrandBooking className='w-6 h-6 mx-1'></TbBrandBooking> My Enrolled Classes
+                                    <TbBrandBooking className='w-6 h-6 mx-1'></TbBrandBooking> My Classes
                                 </NavLink>
                             </div>
                         </>
+                            :
+                            <>
+                                <div className='my-3 font-semibold'>
+                                    <NavLink to='/dashboard/myclass' className='flex items-center hover:font-bold transition mb-1'>
+                                        <BiSelectMultiple className='w-6 h-6 mx-1'></BiSelectMultiple> My Selected Class
+                                    </NavLink>
+                                    <NavLink className='flex items-center hover:font-bold transition mb-1'>
+                                        <TbBrandBooking className='w-6 h-6 mx-1'></TbBrandBooking> My Enrolled Classes
+                                    </NavLink>
+                                </div>
+                            </>
                 }
 
 

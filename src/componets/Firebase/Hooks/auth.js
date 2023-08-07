@@ -1,3 +1,6 @@
+import { useContext } from "react"
+import { AuthContext } from "../../../AuthProvider/AuthProver"
+
 // save a user to database
 export const saveUser = user => {
     const currentUser = {
@@ -14,4 +17,12 @@ export const saveUser = user => {
     })
         .then(res => res.json())
         .then(data => console.log(data))
+}
+
+
+
+// get useContext data
+export const useAuth = ()=>{
+    const auth = useContext(AuthContext);
+    return auth;
 }
